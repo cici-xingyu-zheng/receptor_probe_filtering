@@ -6,7 +6,7 @@ A reproducible pipeline to rank and select padlock probes for odorant receptor t
 - Python ≥ 3.9
 - Standard scientific stack (stock Anaconda is fine): `numpy`, `pandas`, `matplotlib`
 
-> ⚠️ Some inputs are large (e.g., a 7.5 GB heterodimer matrix pickle file). Make sure your machine has ≥16 GB RAM (>=32 GB recommended). Close other apps before loading large pickles.
+> ⚠️ Some inputs are large (e.g., a 7.5 GB heterodimer matrix pickle file). Make sure your machine has at least 16 GB RAM (>=32 GB recommended). Close other apps before loading large pickles.
 
 ## Data
 All data live in the project Dropbox:
@@ -15,15 +15,15 @@ All data live in the project Dropbox:
 
 To run locally:
 1. Copy the entire contents of `data_monohan_probe_filtering_2025/` into the repo as a folder named **`data/`**.
-2. Expect large files (e.g., `heterodimer_nupack_dg_matrix.pkl` ≈ 7.5 GB).
+2. Expect large files.
 
-## Quick Start
+<!-- ## Quick Start
 - Open the main notebook and run all cells. The notebook will:
   1) Pre-filter globally offensive probes using the heterodimer fraction matrix,
   2) Score remaining probes with three z-scored criteria,
   3) Combine scores via exponential scaling,
-  4) Keep at most the **10 best** probes per gene.
-
+  4) Keep at most the **10 best** probes per gene. -->
+<!-- 
 ## Workflow Overview
 
 ### 1) Global offender pre-filter (heterodimer fractions)
@@ -74,4 +74,4 @@ If a gene has ≤10 probes, keep them all.
 ## Reproducing the results
 1. Ensure `data/` is populated as described.
 2. Run the notebook end-to-end.
-3. Review the QC tables/plots and the final per-gene keep list.
+3. Review the QC tables/plots and the final per-gene keep list. -->
