@@ -89,12 +89,12 @@ def collapse_duplicated(
     Returns: 
         Collapsed DataFrame removing duplicates 
     '''
-    # drop start/end if present
+    # drop start/end 
     to_drop = ["sstart", "send"] 
     work = df.drop(columns=to_drop, errors="ignore").copy()
     n_before = len(work)
 
-    # Define identical groups by all non-subject columns
+    # Define identical groups by all not subject columns
     key_cols = [c for c in work.columns if c != subject_col]
     g = work.groupby(key_cols, dropna=False, sort=False)
 
