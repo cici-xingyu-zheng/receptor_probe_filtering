@@ -156,12 +156,22 @@ def keep_top_per_gene(
     prior_keep_mask=None,      # optional: bool mask aligned to all_names
     return_full_mask=False,    # set True to also return keep_mask_full
 ):
-    # --- validations ---
-    required = {score_col, gene_col, name_col}
-    missing = required - set(df.columns)
-    if missing:
-        raise KeyError(f"Missing columns in df: {missing}")
-
+    
+    """
+    Filter DataFrame to keep only top K entries per gene,
+    based on ranking by score_col (lower = better).
+    Also adds per-gene counts and ranks, and overall ranks/percentiles.
+    Returns:
+        out: DataFrame with added columns:
+                        - n_padlocks_in_gene
+                        - rank_in_gene_best
+                        - (optional) rank_overall_best
+                        - (optional) overall_percentile
+                        - keep (bool)
+        kept_df     : subset of out where keep == True
+        dropped_df  : subset of out where keep == False
+        (optional) keep_mask_full : bool array aligned to all_names, combining prior_keep_mask if given
+    """
     out = df.copy()
 
     # overall ranks / percentile (QC)
@@ -184,7 +194,7 @@ def keep_top_per_gene(
     if "rank_in_gene_best" not in out.columns:
         raise RuntimeError("Failed to create 'rank_in_gene_best' – check name_col uniqueness.")
 
-    # keep top K within genes (>K → drop rest; ≤K → keep all)
+    # keep top K within genes (>K then drop rest; <= K then keep all)
     mask_large = out["n_padlocks_in_gene"] > max_per_gene
     out["keep"] = True
     out.loc[mask_large & (out["rank_in_gene_best"] > max_per_gene), "keep"] = False
