@@ -1,9 +1,9 @@
-# receptor_probe_filtering
+# Receptor Probe Filtering
 
-A reproducible pipeline to rank and select padlock probes for odorant receptor targets.
+A reproducible pipeline to rank and select padlock probes for odorant receptor targets, given a pool of candidate probes.
 
 ## Requirements
-- Python ≥ 3.9
+- Python >= 3.9
 - Standard scientific stack (stock Anaconda is fine): `numpy`, `pandas`, `matplotlib`
 
 > ⚠️ Some inputs are large (e.g., a 7.5 GB heterodimer matrix pickle file). Make sure your machine has at least 16 GB RAM (>=32 GB recommended). Close other apps before loading large pickles.
