@@ -10,7 +10,7 @@ A reproducible pipeline to rank and select padlock probes for odorant receptor t
 
 ## Data
 All data live in the project Dropbox:
-- **Dropbox folder:** Odorant_Receptors: `data_monohan_probe_filtering_2025`
+- **Dropbox folder:** `Odorant_Receptors/data_monohan_probe_filtering_2025`
 
 To run locally:
 1. Copy the entire contents of `data_monohan_probe_filtering_2025/` into the repo as a folder named **`data/`**.
@@ -28,9 +28,9 @@ See <a href="filter_algo.pdf" target="_blank">filter_algo.pdf</a> for details.
 <img src="output/fig/round1_sor.png" alt="Flow chart" width="500">
 
 #### Pergene feature filtering:
-<img src="output/fig/round2_sor.png" alt="Flow chart" width="500">
+<img src="output/fig/round2_sor.png" alt="Flow chart" width="800">
 
 
-Number of kept probes in worst 10% for rank_off_target_combined: 0.77%
-Number of kept probes in worst 10% for rank_tm_melting_diff: 0.26%
-Number of kept probes in worst 10% for rank_binding_fraction: 0.27%
+- Number of kept probes in worst 10% for rank_off_target_combined: 0.77%
+- Number of kept probes in worst 10% for rank_tm_melting_diff: 0.26%
+- Number of kept probes in worst 10% for rank_binding_fraction: 0.27%
