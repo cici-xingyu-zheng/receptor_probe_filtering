@@ -25,7 +25,7 @@ See <a href="algo.pdf" target="_blank">algo.pdf</a> for details.
 ## Filtering results
 
 #### Global:
-<img src="output/fig/round1.png" alt="Flow chart" width="500">
+<img src="output/fig/round1.png" alt="Flow chart" width="550">
 
 #### Per-gene feature filtering:
 <img src="output/fig/round2.png" alt="Flow chart" width="800">
