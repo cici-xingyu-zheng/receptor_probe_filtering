@@ -25,12 +25,18 @@ See <a href="algo.pdf" target="_blank">algo.pdf</a> for details.
 ## Filtering results
 
 #### Global:
-<img src="output/fig/round1_sor.png" alt="Flow chart" width="500">
+<img src="output/fig/round1.png" alt="Flow chart" width="500">
 
-#### Pergene feature filtering:
-<img src="output/fig/round2_sor.png" alt="Flow chart" width="800">
+#### Per-gene feature filtering:
+<img src="output/fig/round2.png" alt="Flow chart" width="800">
 
+- Number of kept probes in worst 10% for rank_off_target_combined: 0.77%
+- Number of kept probes in worst 10% for rank_tm_melting_diff: 0.25%
+- Number of kept probes in worst 10% for rank_binding_fraction: 0.30%
 
-Number of kept probes in worst 10% for rank_off_target_combined: 0.77%
-Number of kept probes in worst 10% for rank_tm_melting_diff: 0.25%
-Number of kept probes in worst 10% for rank_binding_fraction: 0.30%
+### Output:
+```
+filtered_probe_set_all_latest-date.csv # all input probe candidate with metrics
+filtered_probe_set_kept_latest-date.csv # kept probes only
+less_than_10_porbes_latest-date.csv # list of genes with less than 10 probes 
+```
