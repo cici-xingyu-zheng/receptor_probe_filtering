@@ -31,6 +31,6 @@ See <a href="algo.pdf" target="_blank">algo.pdf</a> for details.
 <img src="output/fig/round2_sor.png" alt="Flow chart" width="800">
 
 
-- Number of kept probes in worst 10% for rank_off_target_combined: 0.77%
-- Number of kept probes in worst 10% for rank_tm_melting_diff: 0.26%
-- Number of kept probes in worst 10% for rank_binding_fraction: 0.27%
+Number of kept probes in worst 10% for rank_off_target_combined: 0.77%
+Number of kept probes in worst 10% for rank_tm_melting_diff: 0.25%
+Number of kept probes in worst 10% for rank_binding_fraction: 0.30%

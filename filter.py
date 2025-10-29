@@ -249,7 +249,7 @@ def tail_signed_score(x, direction="upper", method="logit", eps=1e-12):
     u = np.clip(u, eps, 1 - eps)
 
     if method == "invnorm":
-        base = stats.norm.ppf(u)             # ~N(0,1)
+        base = stats.norm.ppf(u)             # ~ N(0,1)
     elif method == "logit":
         base = np.log(u / (1 - u))           # harsher on tails
     else:
