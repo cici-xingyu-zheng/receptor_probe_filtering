@@ -1,5 +1,24 @@
 import numpy as np
 import pandas as pd
+from scipy import stats
+import matplotlib.pyplot as plt
+
+def less_than_10_check(probe_df):
+    '''
+    Function to quickly check how many genes have less than 10 probes designed for them
+    '''
+    counts = probe_df['gene_name'].value_counts()
+    counts_df = counts.rename_axis('gene_name').reset_index(name='count')
+    less_than_10_probes_counts_df = counts_df[counts_df['count'] < 10].reset_index(drop=True)
+
+    print(f'Number of genes with less than 10 probes: {len(less_than_10_probes_counts_df)}')
+
+    plt.figure(figsize=(6, 4))
+    less_than_10_probes_counts_df['count'].plot(kind='hist')
+    plt.title('Less than 10 probes per gene count distribution')
+    plt.show()
+
+    return less_than_10_probes_counts_df
 
 def drop_global_offenders(
     P, names, remove_frac=None, sum_threshold=None
@@ -22,10 +41,6 @@ def drop_global_offenders(
     N0 = P.shape[0]
     if remove_frac is None and sum_threshold is None:
         raise ValueError("Provide remove_frac and/or sum_threshold")
-
-    # work on views
-    P = np.asarray(P, dtype=float)
-    names = np.asarray(names, dtype=object)
 
 
     # initial sums and active set
@@ -168,8 +183,6 @@ def keep_top_per_gene(
                         - (optional) rank_overall_best
                         - (optional) overall_percentile
                         - keep (bool)
-        kept_df     : subset of out where keep == True
-        dropped_df  : subset of out where keep == False
         (optional) keep_mask_full : bool array aligned to all_names, combining prior_keep_mask if given
     """
     out = df.copy()
@@ -199,11 +212,8 @@ def keep_top_per_gene(
     out["keep"] = True
     out.loc[mask_large & (out["rank_in_gene_best"] > max_per_gene), "keep"] = False
 
-    kept_df    = out[out["keep"]].copy()
-    dropped_df = out[~out["keep"]].copy()
-
     if not return_full_mask:
-        return out, kept_df, dropped_df
+        return out
 
     # build full-length mask aligned to all_names (original ordering)
     if all_names is None:
@@ -220,4 +230,36 @@ def keep_top_per_gene(
             keep_full[i] = keep_full[i] and name_to_keep[nm]
         # else leave as-is (remains False if prior mask had dropped it)
 
-    return out, kept_df, dropped_df, keep_full
+    return out,keep_full
+
+
+# A more tail targeting scoring function than z-score:
+def tail_signed_score(x, direction="upper", method="logit", eps=1e-12):
+    """
+    direction: "upper" for higher-worse, "lower" for lower-worse
+    method: 
+        "logit" (strong tail emphasis) or 
+        "invnorm" (phi^{-1}, smoother)
+    returns s with median around 0; larger s = worse
+    """
+    x = pd.to_numeric(pd.Series(x), errors="coerce").to_numpy()
+    # percentile in (0,1): average ranks -> plotting position
+    r = stats.rankdata(x, method="average")
+    u = (r - 0.5) / len(x)
+    u = np.clip(u, eps, 1 - eps)
+
+    if method == "invnorm":
+        base = stats.norm.ppf(u)             # ~N(0,1)
+    elif method == "logit":
+        base = np.log(u / (1 - u))           # harsher on tails
+    else:
+        raise ValueError("method must be 'invnorm' or 'logit'")
+
+    # orient so larger = worse
+    if direction == "upper":      # punish high values
+        s = base
+    elif direction == "lower":    # punish low values
+        s = -base
+    else:
+        raise ValueError("direction must be 'upper' or 'lower'")
+    return s
