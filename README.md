@@ -10,7 +10,7 @@ A reproducible pipeline to rank and select padlock probes for odorant receptor t
 
 ## Data
 All data live in the project Dropbox:
-- **Dropbox folder:** `Odorant_Receptors/data_monohan_probe_filtering_2025`
+- **Dropbox folder:** `Odorant_Receptors/data_monohan_probe_filtering_2025/`
 
 To run locally:
 1. Copy the entire contents of `data_monohan_probe_filtering_2025/` into the repo as a folder named **`data/`**.
@@ -20,7 +20,7 @@ To run locally:
 ## Filter algorithm 
 ![Flow chart](flow.png)
 
-See <a href="filter_algo.pdf" target="_blank">filter_algo.pdf</a> for details.
+See <a href="algo.pdf" target="_blank">algo.pdf</a> for details.
 
 ## Filtering results
 
