@@ -164,7 +164,7 @@ def keep_top_per_gene(
     *,
     score_col="score_total",
     gene_col="gene",
-    name_col="padlock_name",   # set to "name" if that's your column
+    name_col="padlock_name",   
     max_per_gene=10,
     add_overall_ranks=True,
     all_names=None,            # optional: full original name list for full mask
@@ -202,7 +202,7 @@ def keep_top_per_gene(
     tmp["rank_in_gene_best"] = tmp.groupby(gene_col).cumcount() + 1
 
     out = out.merge(tmp[[name_col, "rank_in_gene_best"]],
-                    on=name_col, how="left", validate="one_to_one")
+                    on=name_col, how="left", validate="1:1")
 
     if "rank_in_gene_best" not in out.columns:
         raise RuntimeError("Failed to create 'rank_in_gene_best' – check name_col uniqueness.")

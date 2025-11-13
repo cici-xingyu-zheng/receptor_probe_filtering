@@ -37,9 +37,9 @@ See <a href="algo.pdf" target="_blank">algo.pdf</a> for details.
 #### Per-gene feature filtering:
 <img src="output/fig/round2.png" alt="Flow chart" width="800">
 
-- Number of kept probes in worst 10% for rank_off_target_combined: 0.77%
-- Number of kept probes in worst 10% for rank_tm_melting_diff: 0.25%
-- Number of kept probes in worst 10% for rank_binding_fraction: 0.30%
+- Number of kept probes in worst 10% for rank_off_target_combined: 0.93%
+- Number of kept probes in worst 10% for rank_tm_melting_diff: 0.31%
+- Number of kept probes in worst 10% for rank_binding_fraction: 0.39%
 
 #### Output:
 ```
@@ -47,3 +47,16 @@ filtered_probe_set_all_latest-date.csv # all input probe candidate with metrics
 filtered_probe_set_kept_latest-date.csv # kept probes only
 less_than_10_porbes_latest-date.csv # list of genes with less than 10 probes 
 ```
+
+- OR/Taars we have designed probes for: 1148
+- Total number of probe candidates kept: 11244
+- OR/Taars that have 10+ probes: 1074
+- OR/Taars that have less than 10 probes: 74
+
+#### Processes specific to this particular design run (documented in the notebook)
+
+1. Pre-filtering with a conservative `melting5` model:
+We used a more conservative `melting5` temperature calculation to remove probes with high-affinity off-target binding. In the future, if `melting5` becomes part of the probe-pool generation pipeline, this pre-filtering step can be skipped.
+
+2. Redesigning barcodes for Olfr1111 and Olfr657:
+After identifying that the existing barcodes for Olfr1111 and Olfr657 were driving heterodimer formation with many other probes, we redesigned their barcodes and recomputed all secondary-structure-related features. The final probe set reflects these updated barcode designs for the two genes. This iteration might still be needed in the future design process.
