@@ -1,0 +1,10 @@
+[project]
+name = "receptor_probe_filtering"
+version = "0.1.0"
+description = "Basic project configuration for receptor_probe_filtering"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

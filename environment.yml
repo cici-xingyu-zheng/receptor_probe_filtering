@@ -1,0 +1,14 @@
+name: probe-filtering
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - ipykernel
+  - jupyterlab
+  - pip:
+      - numpy
+      - pandas
+      - matplotlib
+      - scipy

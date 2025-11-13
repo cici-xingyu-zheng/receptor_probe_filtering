@@ -8,6 +8,13 @@ A reproducible pipeline to rank and select padlock probes for odorant receptor t
 
 > ⚠️ Some inputs are large (e.g., a 7.5 GB heterodimer matrix pickle file). Make sure your machine has at least 16 GB RAM (>=32 GB recommended). Close other apps before loading large pickles.
 
+## Installation
+You can install all the required dependencies automatically into a new environment by using conda:
+
+    conda env create -f environment.yml
+
+Then select the `probe-filtering` kernel when starting the jupyter notebook `filtering_all.ipynb`
+
 ## Data
 All data live in the project Dropbox:
 - **Dropbox folder:** `Odorant_Receptors/data_monohan_probe_filtering_2025/`
